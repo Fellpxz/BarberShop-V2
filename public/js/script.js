@@ -71,7 +71,7 @@ async function confirmarCompra() {
   }
 }
 
-// DELETAR ITEM!
+// ATUALIZAR
 document.addEventListener("DOMContentLoaded", () => {
   const utilizarButtons = document.querySelectorAll(".utilizar-btn");
 
@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
   async function utilizarItem(id) {
     try {
       const response = await fetch(`/utilizaveis/${id}`, {
-        method: "DELETE",
+        method: "PUT", // Altera o método para PUT
       });
 
       if (response.ok) {

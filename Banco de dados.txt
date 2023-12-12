@@ -15,9 +15,9 @@ CREATE TABLE services (
 
 INSERT INTO services (preco, tipo) VALUES (50, 'Cabelo Clássico');
 
-INSERT INTO services (preco, tipo) VALUES (40, 'Barba Tradicional');
+INSERT INTO services (preco, tipo) VALUES (50, 'Barba Tradicional');
 
-INSERT INTO services (preco, tipo) VALUES (40, 'Tratamento');
+INSERT INTO services (preco, tipo) VALUES (50, 'Tratamento');
 
 CREATE TABLE carrinho (
   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -37,3 +37,13 @@ CREATE TABLE utilizaveis (
   Data DATE DEFAULT (CURRENT_DATE),
   FOREIGN KEY (CodigoCartao) REFERENCES cartoes(codigo)
 );
+
+CREATE TABLE relatorio (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nome VARCHAR(255) NOT NULL,
+  preco DECIMAL(10, 2) NOT NULL,
+  codigoCartao VARCHAR(4) NOT NULL,
+  data DATE DEFAULT (CURRENT_DATE),
+  FOREIGN KEY (codigoCartao) REFERENCES cartoes(codigo)
+);
+

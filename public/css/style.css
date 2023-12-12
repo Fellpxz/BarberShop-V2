@@ -619,3 +619,53 @@ a {
   background-color: #151410;
   font-size: 1.4rem;
 }
+
+/*-- RELÁTORIOS --*/
+#relatorio {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#relatorio .container {
+  width: 75%;
+  display: flex;
+}
+
+#relatorio .container h1 {
+  font-size: 2rem;
+}
+
+#relatorio .container .relatorio-compras {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#relatorio .container .relatorio-compras ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#relatorio .container .relatorio-compras ul li {
+  font-size: 1.6rem;
+}
+
+#relatorio .container .relatorio-utilizaveis {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#relatorio .container .relatorio-utilizaveis ul {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+#relatorio .container .relatorio-utilizaveis ul li {
+  font-size: 1.6rem;
+}

@@ -9,6 +9,7 @@ const ServicesModel = require("../src/models/services.model");
 const CartModel = require("../src/models/cart.model");
 const RewardsModel = require("../src/models/rewards.model");
 const UsableModel = require("../src/models/usable.model");
+const RelatorioModel = require("../src/models/relatorio.model");
 
 // Middlewares
 app.use(cookieParser());
@@ -42,7 +43,11 @@ app.get("/", async (req, res) => {
       codigo
     );
     const getAllUtilByCod = await UsableModel.getAllUtilByCod(codigo);
-
+    const getAvailableUtilByCod = await UsableModel.getAvailableUtilByCod(
+      codigo
+    );
+    const relatorioCompras = await RelatorioModel.getRelatorioByCodigo(codigo);
+    const todosRelatorio = await RelatorioModel.getAllRelatorio();
     // Log para verificar o valor de 'total' antes do render
     const total = getCartItemsByCardCode.reduce(
       (acc, item) => acc + parseFloat(item.preco),
@@ -60,6 +65,9 @@ app.get("/", async (req, res) => {
       getCardByCode,
       getCartItemsByCardCode,
       getAllUtilByCod,
+      getAvailableUtilByCod,
+      relatorioCompras,
+      todosRelatorio,
     });
   } catch (error) {
     console.error(error);
@@ -171,6 +179,7 @@ app.post("/comprar-carrinho", async (req, res) => {
       if (item.tipo === "Serviço") {
         // Insere na tabela 'utilizaveis'
         await UsableModel.insertUtilizavel(item.nome, item.tipo, codigo);
+        await RelatorioModel.addItemToRelatorio(item.nome, item.preco, codigo);
       }
     }
 
@@ -262,15 +271,18 @@ app.post("/add-to-cart", async (req, res) => {
   }
 });
 
-app.delete("/utilizaveis/:id", async (req, res) => {
-  const itemId = req.params.id;
-
+// Rota para atualizar o estado do utilizável para 'Utilizado'
+app.put("/utilizaveis/:id", async (req, res) => {
   try {
-    await UsableModel.deleteUtilizavel(itemId);
-    res.status(204).end();
+    const itemId = req.params.id;
+    await UsableModel.updateUtilizavelToUtilizado(itemId);
+
+    res.status(204).end(); // Responda com sucesso sem conteúdo
   } catch (error) {
-    console.error(`Erro ao excluir utilizável: ${error}`);
-    res.status(500).json({ error: "Erro interno ao excluir utilizável" });
+    console.error(`Erro ao atualizar estado do utilizável: ${error}`);
+    res
+      .status(500)
+      .json({ error: "Erro interno ao atualizar estado do utilizável" });
   }
 });
 

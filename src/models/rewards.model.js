@@ -5,8 +5,8 @@ async function insertRewardOne(codigoCartao) {
 
   try {
     const [rows] = await connection.execute(
-      "INSERT INTO utilizaveis (Nome, Tipo, codigoCartao) VALUES (?, ?, ?)",
-      ["Hidratação Capilar", "Recompensa", codigoCartao]
+      "INSERT INTO utilizaveis (Nome, Tipo, Estado, codigoCartao) VALUES (?, ?, ?, ?)",
+      ["Produtos para Barba", "Recompensa", "Disponivel", codigoCartao]
     );
 
     return rows.insertId;
@@ -23,8 +23,8 @@ async function insertRewardTwo(codigoCartao) {
 
   try {
     const [rows] = await connection.execute(
-      "INSERT INTO utilizaveis (Nome, Tipo, codigoCartao) VALUES (?, ?, ?)",
-      ["Produtos de Barba ou Cabelo", "Recompensa", codigoCartao]
+      "INSERT INTO utilizaveis (Nome, Tipo, codigoCartao) VALUES (?, ?, ?, ?)",
+      ["Produtos para Cabelo", "Recompensa", "Disponivel", codigoCartao]
     );
 
     return rows.insertId;
@@ -41,8 +41,8 @@ async function insertRewardThree(codigoCartao) {
 
   try {
     const [rows] = await connection.execute(
-      "INSERT INTO utilizaveis (Nome, Tipo, codigoCartao) VALUES (?, ?, ?)",
-      ["Serviço Bônus", "Recompensa", codigoCartao]
+      "INSERT INTO utilizaveis (Nome, Tipo, codigoCartao) VALUES (?, ?, ?, ?)",
+      ["Produtos de Barba e Cabelo", "Recompensa", "Disponivel", codigoCartao]
     );
 
     return rows.insertId;

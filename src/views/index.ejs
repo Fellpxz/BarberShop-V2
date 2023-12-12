@@ -85,9 +85,9 @@
         <h3>Serviços e Recompensas</h3>
       </header>
       <div class="holder">
-        <% console.log('getAllUtilByCod:', getAllUtilByCod); %> <% if
-        (getAllUtilByCod.length > 0) { %> <% getAllUtilByCod.forEach(item => {
-        %>
+        <% console.log('getAvailableUtilByCod:', getAvailableUtilByCod); %> <%
+        if (getAvailableUtilByCod.length > 0) { %> <%
+        getAvailableUtilByCod.forEach(item => { %>
         <div class="utilizavel-item">
           <p>Nome: <%= item.Nome %></p>
           <p>Tipo: <%= item.Tipo %></p>
@@ -102,7 +102,6 @@
         <% } %>
       </div>
     </div>
-
     <!--CABEÇALHO PRINCIPAL-->
     <header id="main-header">
       <div class="container">
@@ -350,6 +349,93 @@
         </div>
       </div>
     </section>
+
+    <% if (getCardByCode && getCardByCode.codigo) { %>
+    <section id="relatorio">
+      <div class="container">
+        <% if (getCardByCode.tipo === "1") { %>
+        <div class="relatorio-compras">
+          <h1>Relatorio de compras</h1>
+          <% if (todosRelatorio && todosRelatorio.length > 0) { %>
+            <ul>
+              <% todosRelatorio.forEach(item => { %>
+                <li>
+                  <p>ID: <%= item.id %></p>
+                  <p>Nome: <%= item.nome %></p>
+                  <p>Preço: <%= item.preco %></p>
+                  <p>Código Cartão: <%= item.codigoCartao %></p>
+                  <p>Data: <%= item.data %></p>
+                </li>
+              <% }); %>
+            </ul>
+          <% } else { %>
+            <p>Não há relatórios disponíveis.</p>
+          <% } %>
+        </div>
+        <div class="relatorio-utilizaveis">
+          <h1>Relatório de serviços</h1>
+          <% if (usableItems && usableItems.length > 0) { %>
+            <ul>
+              <% usableItems.forEach(item => { %>
+                <li>
+                  <p>ID: <%= item.ID %></p>
+                  <p>Nome: <%= item.Nome %></p>
+                  <p>Tipo: <%= item.Tipo %></p>
+                  <p>Código Cartão: <%= item.CodigoCartao %></p>
+                  <p>Estado: <%= item.Estado %></p>
+                  <p>DATA: <%= item.Data %></p>
+                </li>
+              <% }); %>
+            </ul>
+          <% } else { %>
+            <p>Não há itens utilizáveis disponíveis.</p>
+          <% } %>
+        </div>
+        </div>
+        <% } else { %>
+        <!-- Se o tipo do cartão não for 1 -->
+        <div class="relatorio-compras">
+          <h1>Relatório de compras</h1>
+          <% if (relatorioCompras && relatorioCompras.length > 0) { %>
+          <ul>
+            <% relatorioCompras.forEach(item => { %>
+            <li>
+              <p>ID: <%= item.id %></p>
+              <p>Nome: <%= item.nome %></p>
+              <p>Preço: <%= item.preco %></p>
+              <p>Código Cartão: <%= item.codigoCartao %></p>
+              <p>Data: <%= item.data %></p>
+            </li>
+            <% }); %>
+          </ul>
+          <% } else { %>
+          <p>Não há compras registradas.</p>
+          <% } %>
+        </div>
+        <div class="relatorio-utilizaveis">
+          <h1>Relatório de serviços</h1>
+          <% if (getAllUtilByCod && getAllUtilByCod.length > 0) { %>
+          <ul>
+            <% getAllUtilByCod.forEach(item => { %>
+            <li>
+              <p>ID: <%= item.ID %></p>
+              <p>Nome: <%= item.Nome %></p>
+              <p>Tipo: <%= item.Tipo %></p>
+              <p>Código Cartão: <%= item.CodigoCartao %></p>
+              <p>Estado: <%= item.Estado %></p>
+              <p>DATA: <%= item.Data %></p>
+              <!-- Adicione mais informações do item conforme necessário -->
+            </li>
+            <% }); %>
+          </ul>
+          <% } else { %>
+          <p>Não há serviços disponíveis.</p>
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+    </section>
+    <% } %>
 
     <script src="js/script.js"></script>
     <!--FONT AWESOME-->
